@@ -16,7 +16,7 @@ User.add({
 		options: 'CRC, pricing strategy, revenue management,',  initial: true },
 		//** THIS CAUSED THE APP TO CRASH ON STARTUP
 
-	team: { type: Types.Relationship, ref: 'Team', initial: false, required: true },
+	//team: { type: Types.Relationship, ref: 'Team', initial: false, required: true },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
 });
