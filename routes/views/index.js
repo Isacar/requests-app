@@ -1,4 +1,5 @@
 var keystone = require('keystone');
+var Request = keystone.list('Request');
 
 exports = module.exports = function (req, res) {
 
@@ -9,6 +10,25 @@ exports = module.exports = function (req, res) {
 	// item in the header navigation.
 	locals.section = 'home';
 
+	view.on('init', function (next) {
+		//query db with requests from logged in user team
+		Request.model.find()
+		//.where({'team':req.user.team})
+		.where({'status': 'open', 'team':req.user.team}) //ands treated as sets
+		.sort('-createdAt')
+		.exec(function(err, requests){
+			//TODO handle when user has no team
+			if (requests) {
+				locals.hasRequests = true;
+				locals.requests = requests;
+			}
+
+			console.log(requests);
+				next();
+
+		});
+	});
+
 	// Render the view
-	view.render('index');
+	view.render('teamBoard');
 };

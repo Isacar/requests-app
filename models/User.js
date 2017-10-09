@@ -14,6 +14,9 @@ User.add({
 	role: { type: Types.Select, options: 'client, assignee',  initial: true},
 	department: { type: Types.Select,
 		options: 'CRC, pricing strategy, revenue management,',  initial: true },
+		//** THIS CAUSED THE APP TO CRASH ON STARTUP
+
+	team: { type: Types.Relationship, ref: 'Team', initial: false, required: true },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
 });
